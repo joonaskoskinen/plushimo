@@ -13,12 +13,22 @@ interface CartItem {
 
 export async function createCheckoutSession(cartItems: CartItem[]) {
   try {
+    const invalidItems = cartItems.filter((item) => !item.variantId || !item.variantId.startsWith("gid://"))
+
+    if (invalidItems.length > 0) {
+      console.error("[v0] Invalid items in cart:", invalidItems)
+      return {
+        success: false,
+        error: "Some items in your cart don't have valid product variants. Please remove them and try again.",
+      }
+    }
+
     // Create a new Shopify cart
     const cart = await createCart()
 
     // Transform cart items to Shopify cart lines format
     const lines = cartItems.map((item) => ({
-      merchandiseId: item.variantId || item.id,
+      merchandiseId: item.variantId!, // Use only variantId, no fallback to handle
       quantity: item.quantity,
     }))
 
