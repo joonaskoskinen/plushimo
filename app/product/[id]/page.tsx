@@ -14,8 +14,9 @@ import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/toast"
 import { ProductCard } from "@/components/product-card"
 import { getProduct, getProducts } from "@/lib/shopify"
-import type { ShopifyProduct } from "@/lib/shopify/types"
+import type { ShopifyProduct, ProductVariant } from "@/lib/shopify/types"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { VariantSelector } from "@/components/variant-selector"
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params)
@@ -26,6 +27,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [relatedProducts, setRelatedProducts] = useState<ShopifyProduct[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null)
 
   useEffect(() => {
     async function fetchProduct() {
@@ -35,8 +37,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           notFound()
         }
         setProduct(productData)
+        setSelectedVariant(productData.variants[0] || null)
 
-        // Fetch related products
         const allProducts = await getProducts({ first: 8 })
         const related = allProducts
           .filter((p) => p.productType === productData.productType && p.handle !== productData.handle)
@@ -100,15 +102,22 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   const isLiked = isInWishlist(product.handle)
   const productName = product.title
-  const price = Number.parseFloat(product.priceRange.minVariantPrice.amount)
+  const price = selectedVariant
+    ? Number.parseFloat(selectedVariant.price.amount)
+    : Number.parseFloat(product.priceRange.minVariantPrice.amount)
   const imageUrl = product.images.edges[0]?.node.url || "/placeholder.svg"
 
   const handleAddToCart = () => {
-    const variantId = product.variants[0]?.id
+    const variantId = selectedVariant?.id
 
     if (!variantId) {
-      showToast("Tuote ei ole saatavilla", "error")
-      console.error("[v0] Product has no variants:", product.handle)
+      showToast("Valitse ensin koko", "error")
+      console.error("[v0] No variant selected")
+      return
+    }
+
+    if (!selectedVariant.availableForSale) {
+      showToast("Valittu koko ei ole saatavilla", "error")
       return
     }
 
@@ -134,7 +143,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       <Header />
       <main className="py-8 lg:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
           <div className="mb-6">
             <Button variant="ghost" asChild className="gap-2">
               <Link href="/">
@@ -144,14 +152,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             </Button>
           </div>
 
-          {/* Product Details */}
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 mb-16">
-            {/* Image Gallery */}
             <div className="relative aspect-square overflow-hidden rounded-2xl bg-secondary">
               <Image src={imageUrl || "/placeholder.svg"} alt={productName} fill className="object-cover" />
             </div>
 
-            {/* Product Info */}
             <div className="flex flex-col gap-6">
               <div>
                 <h1 className="text-4xl font-bold text-balance mb-4">{productName}</h1>
@@ -160,6 +165,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <p className="text-5xl font-bold text-primary">{price.toFixed(2)} €</p>
 
               <p className="text-lg text-muted-foreground text-pretty leading-relaxed">{product.description}</p>
+
+              <VariantSelector
+                product={product}
+                selectedVariant={selectedVariant}
+                onVariantChange={setSelectedVariant}
+              />
 
               <div className="space-y-3">
                 <Button size="lg" className="w-full gap-2 text-lg h-14" onClick={handleAddToCart}>
@@ -178,7 +189,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </Button>
               </div>
 
-              {/* Product Features */}
               <div className="border-t pt-6 space-y-4">
                 <div className="flex items-center gap-3">
                   <Truck className="h-5 w-5 text-primary" />
@@ -192,7 +202,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             </div>
           </div>
 
-          {/* Related Products */}
           {relatedProducts.length > 0 && (
             <div>
               <h2 className="text-3xl font-bold mb-8">{t.productDetail.relatedProducts}</h2>
