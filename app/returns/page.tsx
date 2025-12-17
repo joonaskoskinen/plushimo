@@ -23,8 +23,8 @@ export default function ReturnsPage() {
         <ol className="list-decimal pl-6 mb-6 space-y-3">
           <li>
             Email us at{" "}
-            <a href="mailto:plushimo.info@gmail.com" className="text-primary hover:underline">
-              plushimo.info@gmail.com
+            <a href="mailto:support@plushimo.com" className="text-primary hover:underline">
+              support@plushimo.com
             </a>{" "}
             with your order number and reason for return
           </li>
