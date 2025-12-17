@@ -60,12 +60,7 @@ export default function AboutPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 lg:grid-cols-2 items-center">
               <div className="relative aspect-square rounded-2xl overflow-hidden bg-secondary">
-                <Image
-                  src="/cozy-plushie-collection-shelf.jpg"
-                  alt="Our plushie collection"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/cozy-plushie-collection-on-shelves.jpg" alt="Our plushie collection" fill className="object-cover" />
               </div>
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">Our Story</h2>
