@@ -14,8 +14,8 @@ export default function ContactPage() {
           <div className="space-y-3">
             <p>
               <strong>Email:</strong>{" "}
-              <a href="mailto:plushimo.info@gmail.com" className="text-primary hover:underline">
-                plushimo.info@gmail.com
+              <a href="mailto:support@plushimo.com" className="text-primary hover:underline">
+                support@plushimo.com
               </a>
             </p>
             <p className="text-muted-foreground text-sm">
@@ -38,7 +38,7 @@ export default function ContactPage() {
           <div>
             <h3 className="text-lg font-semibold mb-2">Can I change or cancel my order?</h3>
             <p>
-              Please contact us immediately at plushimo.info@gmail.com. We'll do our best to accommodate changes before
+              Please contact us immediately at support@plushimo.com. We'll do our best to accommodate changes before
               the order ships.
             </p>
           </div>
