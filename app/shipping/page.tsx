@@ -47,8 +47,8 @@ export default function ShippingPage() {
         <h2 className="text-2xl font-semibold mb-4">Shipping Issues</h2>
         <p className="mb-4">
           If your order hasn't arrived within the expected timeframe, please contact us at{" "}
-          <a href="mailto:plushimo.info@gmail.com" className="text-primary hover:underline">
-            plushimo.info@gmail.com
+          <a href="mailto:support@plushimo.com" className="text-primary hover:underline">
+            support@plushimo.com
           </a>{" "}
           with your order number and we'll investigate.
         </p>
