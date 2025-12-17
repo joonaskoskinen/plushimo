@@ -16,13 +16,13 @@ export function CustomerReviews() {
       name: "Emma K.",
       rating: 5,
       comment: t.reviews.review1,
-      date: "2 days ago",
+      date: "2 weeks ago",
     },
     {
       name: "Mika H.",
       rating: 5,
       comment: t.reviews.review2,
-      date: "1 week ago",
+      date: "1 month ago",
     },
     {
       name: "Sarah M.",
