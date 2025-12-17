@@ -12,12 +12,12 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://plushimo.com"),
   title: {
-    default: "Plushimo - Söpöjä Pehmoeläimiä | Laadukkaita Pehmoleluja",
+    default: "Plushimo - Adorable Plushies | Premium Quality Stuffed Animals",
     template: "%s | Plushimo",
   },
   description:
-    "Söpöjä ja laadukkaita pehmoleluja jokaiseen kotiin. Luomme onnea ja iloa yksi halaus kerrallaan. Ilmainen toimitus yli 50€ tilauksiin.",
-  keywords: ["pehmoeläimet", "pehmolelut", "söpöt pehmot", "lahjaideat", "plushies", "stuffed animals"],
+    "Adorable and high-quality plushies for every home. Creating happiness and joy one hug at a time. Free shipping on orders over €50.",
+  keywords: ["plushies", "stuffed animals", "cute plushies", "gift ideas", "soft toys", "teddy bears"],
   authors: [{ name: "Plushimo" }],
   creator: "Plushimo",
   publisher: "Plushimo",
@@ -28,11 +28,11 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "fi_FI",
+    locale: "en_US",
     url: "/",
     siteName: "Plushimo",
-    title: "Plushimo - Söpöjä Pehmoeläimiä",
-    description: "Söpöjä ja laadukkaita pehmoleluja jokaiseen kotiin. Ilmainen toimitus yli 50€ tilauksiin.",
+    title: "Plushimo - Adorable Premium Plushies",
+    description: "Adorable and high-quality plushies for every home. Free shipping on orders over €50.",
     images: [
       {
         url: "/plushimo-logo.png",
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Plushimo - Söpöjä Pehmoeläimiä",
-    description: "Söpöjä ja laadukkaita pehmoleluja jokaiseen kotiin.",
+    title: "Plushimo - Adorable Premium Plushies",
+    description: "Adorable and high-quality plushies for every home.",
     images: ["/plushimo-logo.png"],
   },
   robots: {
@@ -96,7 +96,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fi">
+    <html lang="en">
       <body className={`font-sans antialiased`}>
         <LanguageProvider>
           <CartProvider>{children}</CartProvider>
