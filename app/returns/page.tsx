@@ -62,8 +62,8 @@ export default function ReturnsPage() {
 
         <p className="text-muted-foreground mt-8">
           Questions about returns? Contact us at{" "}
-          <a href="mailto:plushimo.info@gmail.com" className="text-primary hover:underline">
-            plushimo.info@gmail.com
+          <a href="mailto:support@plushimo.com" className="text-primary hover:underline">
+            support@plushimo.com
           </a>{" "}
           and we'll be happy to help!
         </p>
