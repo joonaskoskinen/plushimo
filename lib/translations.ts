@@ -102,10 +102,10 @@ export const translations = {
       title: "What Our Customers Say",
       subtitle: "Real reviews from real plushie lovers",
       review1:
-        "Absolutely adorable! The quality is amazing and my daughter loves her new teddy bear. Worth every penny!",
-      review2: "Super soft and well-made. These plushies are perfect gifts. Fast shipping too!",
+        "I ordered this as a gift and honestly didn’t expect it to be this soft. The plush looks exactly like the photos and the quality feels really good. Shipping took a bit, but it arrived well packaged and in perfect condition.",
+      review2: "Bought one on a whim and ended up ordering another a week later. The material feels durable and not cheap at all. Customer support also replied quickly when I had a question about shipping.",
       review3:
-        "Beautiful plushie! Exactly as pictured. The only reason for 4 stars is I wish there were more color options.",
+        "Super cute and very cozy. Slightly bigger than I expected, which was actually a nice surprise. Took a little while to arrive, but overall I’m really happy with the purchase.",
     },
     trust: {
       secure: "Secure Payment",
