@@ -36,7 +36,7 @@ export function Hero() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="animate-bounce-gentle">
                 <Image
-                  src="/cute-kawaii-pink-teddy-bear-plushie-with-bow-sitti.jpg"
+                  src="/images/image.png"
                   alt={t.hero.imageAlt}
                   width={500}
                   height={500}
