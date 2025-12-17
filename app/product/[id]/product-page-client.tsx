@@ -136,6 +136,7 @@ export default function ProductPageClient({ initialProduct, initialError, produc
       price: price,
       image: imageUrl,
       variantId: variantId,
+      selectedOptions: selectedVariant.selectedOptions,
     })
     showToast(t.cart.addedToCart, "success")
   }
