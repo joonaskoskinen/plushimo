@@ -110,8 +110,8 @@ export default function TermsPage() {
         <p className="mb-4">If you have questions about these Terms of Service, please contact us:</p>
         <p className="mb-2">
           Email:{" "}
-          <a href="mailto:plushimo.info@gmail.com" className="text-primary hover:underline">
-            plushimo.info@gmail.com
+          <a href="mailto:support@plushimo.com" className="text-primary hover:underline">
+            support@plushimo.com
           </a>
         </p>
 
