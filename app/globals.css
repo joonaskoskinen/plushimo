@@ -75,6 +75,7 @@
 }
 
 @theme inline {
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
@@ -126,6 +127,97 @@
 
 /* Custom animations for floating elements and bouncy interactions */
 @layer utilities {
+  /* Adding slide animation keyframes */
+  @keyframes slide-in-from-top-2 {
+    from {
+      transform: translateY(-0.5rem);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-from-bottom-2 {
+    from {
+      transform: translateY(0.5rem);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-from-left-2 {
+    from {
+      transform: translateX(-0.5rem);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-from-right-2 {
+    from {
+      transform: translateX(0.5rem);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-from-left-52 {
+    from {
+      transform: translateX(-13rem);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-from-right-52 {
+    from {
+      transform: translateX(13rem);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out-to-left-52 {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-13rem);
+    }
+  }
+
+  @keyframes slide-out-to-right-52 {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(13rem);
+    }
+  }
+
+  @keyframes slide-in-from-right {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-out-to-right {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
   @keyframes float {
     0%,
     100% {
