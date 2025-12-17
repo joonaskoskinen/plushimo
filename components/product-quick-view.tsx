@@ -7,7 +7,9 @@ import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/toast"
-import type { ShopifyProduct } from "@/lib/shopify/types"
+import type { ShopifyProduct, ProductVariant } from "@/lib/shopify/types"
+import { VariantSelector } from "@/components/variant-selector"
+import { useState } from "react"
 
 interface ProductQuickViewProps {
   product: ShopifyProduct
@@ -19,18 +21,33 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
   const { addToCart, toggleWishlist, isInWishlist } = useCart()
   const { showToast } = useToast()
   const isLiked = isInWishlist(product.handle)
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(product.variants[0] || null)
 
   const productName = product.title
-  const price = Number.parseFloat(product.priceRange.minVariantPrice.amount)
+  const price = selectedVariant
+    ? Number.parseFloat(selectedVariant.price.amount)
+    : Number.parseFloat(product.priceRange.minVariantPrice.amount)
   const imageUrl = product.images.edges[0]?.node.url || "/placeholder.svg"
 
   const handleAddToCart = () => {
+    const variantId = selectedVariant?.id
+
+    if (!variantId) {
+      showToast("Valitse ensin koko", "error")
+      return
+    }
+
+    if (!selectedVariant.availableForSale) {
+      showToast("Valittu koko ei ole saatavilla", "error")
+      return
+    }
+
     addToCart({
       id: product.handle,
       title: product.title,
       price: price,
       image: imageUrl,
-      variantId: product.variants[0]?.id,
+      variantId: variantId,
     })
     showToast(t.cart.addedToCart, "success")
   }
@@ -74,6 +91,13 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
               <p className="text-4xl font-bold text-primary">{price.toFixed(2)} €</p>
 
               <p className="text-muted-foreground text-pretty">{product.description}</p>
+
+              {/* Variant Selector */}
+              <VariantSelector
+                product={product}
+                selectedVariant={selectedVariant}
+                onVariantChange={setSelectedVariant}
+              />
 
               <div className="mt-auto space-y-3">
                 <Button size="lg" className="w-full gap-2" onClick={handleAddToCart}>
