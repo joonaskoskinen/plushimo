@@ -17,12 +17,12 @@ export function CartSidebar() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm animate-in fade-in"
+        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-opacity duration-300"
         onClick={() => setIsCartOpen(false)}
       />
 
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 z-50 h-full w-full max-w-md bg-background shadow-2xl animate-in slide-in-from-right duration-300">
+      <div className="fixed right-0 top-0 z-50 h-full w-full max-w-md bg-background shadow-2xl transform transition-transform duration-300 ease-out">
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex items-center justify-between border-b p-6">
@@ -48,14 +48,29 @@ export function CartSidebar() {
             ) : (
               <div className="space-y-4">
                 {cart.map((item) => (
-                  <div key={item.id} className="flex gap-4 rounded-lg border p-4 transition-colors hover:bg-muted/50">
+                  <div
+                    key={`${item.id}-${item.variantId}`}
+                    className="flex gap-4 rounded-lg border p-4 transition-colors hover:bg-muted/50"
+                  >
                     <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-muted">
                       <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
                       <div className="flex items-start justify-between">
-                        <h3 className="font-semibold text-sm">{item.title}</h3>
-                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => removeFromCart(item.id)}>
+                        <div>
+                          <h3 className="font-semibold text-sm">{item.title}</h3>
+                          {item.selectedOptions && item.selectedOptions.length > 0 && (
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {item.selectedOptions.map((opt) => opt.value).join(" / ")}
+                            </p>
+                          )}
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6"
+                          onClick={() => removeFromCart(item.id, item.variantId)}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -65,7 +80,7 @@ export function CartSidebar() {
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7"
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            onClick={() => updateQuantity(item.id, item.quantity - 1, item.variantId)}
                           >
                             <Minus className="h-3 w-3" />
                           </Button>
@@ -74,7 +89,7 @@ export function CartSidebar() {
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7"
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            onClick={() => updateQuantity(item.id, item.quantity + 1, item.variantId)}
                           >
                             <Plus className="h-3 w-3" />
                           </Button>
