@@ -6,6 +6,7 @@ import { ProductQuickView } from "@/components/product-quick-view"
 import { CategoryFilter } from "@/components/category-filter"
 import { useLanguage } from "@/lib/language-context"
 import { ScrollReveal } from "./scroll-reveal"
+import { ProductCardSkeleton } from "./product-card-skeleton"
 import type { ShopifyProduct } from "@/lib/shopify/types"
 
 interface ProductGridProps {
@@ -16,11 +17,18 @@ export function ProductGrid({ products }: ProductGridProps) {
   const { t } = useLanguage()
   const [selectedProduct, setSelectedProduct] = useState<ShopifyProduct | null>(null)
   const [activeCategory, setActiveCategory] = useState("all")
+  const [isLoading, setIsLoading] = useState(false)
 
   const filteredProducts =
     activeCategory === "all"
       ? products
       : products.filter((p) => p.productType?.toLowerCase() === activeCategory.toLowerCase())
+
+  const handleCategoryChange = (category: string) => {
+    setIsLoading(true)
+    setActiveCategory(category)
+    setTimeout(() => setIsLoading(false), 300)
+  }
 
   return (
     <>
@@ -35,17 +43,19 @@ export function ProductGrid({ products }: ProductGridProps) {
             </div>
           </ScrollReveal>
 
-          <CategoryFilter activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+          <CategoryFilter activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filteredProducts.map((product, index) => (
-              <ScrollReveal key={product.id} delay={index * 50}>
-                <ProductCard product={product} onQuickView={setSelectedProduct} />
-              </ScrollReveal>
-            ))}
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, index) => <ProductCardSkeleton key={index} />)
+              : filteredProducts.map((product, index) => (
+                  <ScrollReveal key={product.id} delay={index * 50}>
+                    <ProductCard product={product} onQuickView={setSelectedProduct} />
+                  </ScrollReveal>
+                ))}
           </div>
 
-          {filteredProducts.length === 0 && (
+          {filteredProducts.length === 0 && !isLoading && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
                 {activeCategory === "all"
