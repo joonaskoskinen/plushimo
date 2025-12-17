@@ -9,6 +9,7 @@ import { CustomerReviews } from "@/components/customer-reviews"
 import { TrustBadges } from "@/components/trust-badges"
 import { AnimatedBackground } from "@/components/animated-background"
 import { MicroInteractions } from "@/components/micro-interactions"
+import { BackToTop } from "@/components/back-to-top"
 import { getProducts } from "@/lib/shopify"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
@@ -76,6 +77,7 @@ export default async function Home() {
       </main>
       <Footer />
       <CartSidebar />
+      <BackToTop />
     </div>
   )
 }
