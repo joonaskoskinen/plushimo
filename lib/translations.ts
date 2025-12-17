@@ -71,7 +71,7 @@ export const translations = {
         terms: "Terms",
       },
       copyright: "Made with",
-      contact: "Contact: plushimo.info@gmail.com",
+      contact: "Contact: support@plushimo.com",
     },
     cart: {
       title: "Shopping Cart",
