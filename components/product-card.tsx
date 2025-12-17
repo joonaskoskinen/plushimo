@@ -8,6 +8,7 @@ import { useLanguage } from "@/lib/language-context"
 import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/toast"
 import { use3DTilt } from "@/hooks/use-3d-tilt"
+import { useState } from "react"
 import type { ShopifyProduct } from "@/lib/shopify/types"
 
 interface ProductCardProps {
@@ -21,6 +22,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   const { showToast } = useToast()
   const isLiked = isInWishlist(product.handle)
   const { ref, style } = use3DTilt()
+  const [isHovered, setIsHovered] = useState(false)
 
   const productName = product.title
   const categoryName = product.productType || "Plushies"
@@ -31,7 +33,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
     const variantId = product.variants[0]?.id
 
     if (!variantId) {
-      showToast("Tuote ei ole saatavilla", "error")
+      showToast("Product not available", "error")
       console.error("[v0] Product has no variants:", product.handle)
       return
     }
@@ -54,14 +56,20 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   }
 
   return (
-    <Card ref={ref} className="group relative overflow-hidden transition-all duration-300" style={style}>
+    <Card
+      ref={ref}
+      className="group relative overflow-hidden transition-all duration-300 hover:shadow-2xl"
+      style={style}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <CardContent className="p-0">
         <div className="relative aspect-square overflow-hidden bg-secondary">
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={productName}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className={`object-cover transition-all duration-700 ${isHovered ? "scale-125" : "scale-100"}`}
           />
 
           <div className="absolute inset-0 bg-background/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
