@@ -4,9 +4,17 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
+import { useEffect, useState } from "react"
 
 export function Hero() {
   const { t } = useLanguage()
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const scrollToProducts = () => {
     const productsSection = document.getElementById("products")
@@ -18,10 +26,18 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary to-accent/20 py-20 lg:py-32">
       <div className="absolute inset-0 pointer-events-none opacity-10">
-        <div className="absolute top-10 left-10 text-9xl">🧸</div>
-        <div className="absolute bottom-20 right-20 text-8xl">💕</div>
-        <div className="absolute top-1/2 left-1/4 text-6xl">✨</div>
-        <div className="absolute bottom-1/3 left-1/3 text-7xl">🎀</div>
+        <div className="absolute top-10 left-10 text-9xl" style={{ transform: `translateY(${scrollY * 0.2}px)` }}>
+          🧸
+        </div>
+        <div className="absolute bottom-20 right-20 text-8xl" style={{ transform: `translateY(${scrollY * 0.15}px)` }}>
+          💕
+        </div>
+        <div className="absolute top-1/2 left-1/4 text-6xl" style={{ transform: `translateY(${scrollY * 0.25}px)` }}>
+          ✨
+        </div>
+        <div className="absolute bottom-1/3 left-1/3 text-7xl" style={{ transform: `translateY(${scrollY * 0.1}px)` }}>
+          🎀
+        </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
