@@ -1,12 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { X, CheckCircle2, Heart } from "lucide-react"
+import { X, CheckCircle2, Heart, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface ToastProps {
   message: string
-  type?: "success" | "wishlist"
+  type?: "success" | "wishlist" | "error"
   duration?: number
   onClose: () => void
 }
@@ -31,6 +31,7 @@ export function Toast({ message, type = "success", duration = 3000, onClose }: T
     >
       {type === "success" && <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />}
       {type === "wishlist" && <Heart className="h-5 w-5 text-primary fill-primary flex-shrink-0" />}
+      {type === "error" && <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />}
       <p className="text-sm font-medium">{message}</p>
       <Button
         variant="ghost"
@@ -48,9 +49,11 @@ export function Toast({ message, type = "success", duration = 3000, onClose }: T
 }
 
 export function useToast() {
-  const [toasts, setToasts] = useState<Array<{ id: number; message: string; type: "success" | "wishlist" }>>([])
+  const [toasts, setToasts] = useState<Array<{ id: number; message: string; type: "success" | "wishlist" | "error" }>>(
+    [],
+  )
 
-  const showToast = (message: string, type: "success" | "wishlist" = "success") => {
+  const showToast = (message: string, type: "success" | "wishlist" | "error" = "success") => {
     const id = Date.now()
     setToasts((prev) => [...prev, { id, message, type }])
   }
