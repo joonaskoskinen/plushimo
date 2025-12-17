@@ -38,22 +38,22 @@ export default async function Home() {
           <div className="container mx-auto px-4 py-8">
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Shopify-yhteys epäonnistui</AlertTitle>
+              <AlertTitle>Shopify Connection Failed</AlertTitle>
               <AlertDescription>
                 <div className="space-y-2">
-                  <p className="font-semibold">Online Store -kanava on lukittu</p>
-                  <p>Aktivoi Storefront API Shopify-hallintapaneelissa:</p>
+                  <p className="font-semibold">Online Store channel is locked</p>
+                  <p>Activate Storefront API in your Shopify admin panel:</p>
                   <ol className="list-decimal list-inside space-y-1 text-sm">
-                    <li>Kirjaudu Shopify Admin -sivulle</li>
+                    <li>Log in to Shopify Admin</li>
                     <li>
-                      Siirry kohtaan <strong>Settings → Apps and sales channels</strong>
+                      Go to <strong>Settings → Apps and sales channels</strong>
                     </li>
                     <li>
-                      Klikkaa <strong>Develop apps</strong>
+                      Click <strong>Develop apps</strong>
                     </li>
-                    <li>Luo uusi app tai valitse olemassa oleva</li>
+                    <li>Create a new app or select an existing one</li>
                     <li>
-                      Aktivoi <strong>Storefront API</strong> ja anna seuraavat käyttöoikeudet:
+                      Activate <strong>Storefront API</strong> and grant the following permissions:
                       <ul className="list-disc list-inside ml-4">
                         <li>Read products, variants, and collections</li>
                         <li>Read customer tags</li>
@@ -61,7 +61,7 @@ export default async function Home() {
                       </ul>
                     </li>
                   </ol>
-                  <p className="text-xs mt-2 opacity-80">Virhe: {shopifyError}</p>
+                  <p className="text-xs mt-2 opacity-80">Error: {shopifyError}</p>
                 </div>
               </AlertDescription>
             </Alert>
