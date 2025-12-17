@@ -131,7 +131,10 @@ export async function getProducts({
     variables: { first, sortKey, reverse, query: searchQuery },
   })
 
-  return data.products.edges.map((edge) => edge.node)
+  return data.products.edges.map((edge) => ({
+    ...edge.node,
+    variants: edge.node.variants.edges.map((variantEdge) => variantEdge.node),
+  }))
 }
 
 // Get single product by handle
@@ -203,7 +206,12 @@ export async function getProduct(handle: string): Promise<ShopifyProduct | null>
     variables: { handle },
   })
 
-  return data.product
+  if (!data.product) return null
+
+  return {
+    ...data.product,
+    variants: data.product.variants.edges.map((edge) => edge.node),
+  }
 }
 
 // Get collections
@@ -335,7 +343,10 @@ export async function getCollectionProducts({
     return []
   }
 
-  return data.collection.products.edges.map((edge) => edge.node)
+  return data.collection.products.edges.map((edge) => ({
+    ...edge.node,
+    variants: edge.node.variants.edges.map((variantEdge) => variantEdge.node),
+  }))
 }
 
 // Create cart
