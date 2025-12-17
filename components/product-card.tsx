@@ -28,12 +28,20 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   const imageUrl = product.images.edges[0]?.node.url || "/placeholder.svg"
 
   const handleAddToCart = () => {
+    const variantId = product.variants[0]?.id
+
+    if (!variantId) {
+      showToast("Tuote ei ole saatavilla", "error")
+      console.error("[v0] Product has no variants:", product.handle)
+      return
+    }
+
     addToCart({
       id: product.handle,
       title: product.title,
       price: price,
       image: imageUrl,
-      variantId: product.variants[0]?.id,
+      variantId: variantId,
     })
     showToast(t.cart.addedToCart, "success")
   }
