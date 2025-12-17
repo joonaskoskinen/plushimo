@@ -37,12 +37,6 @@ export function Header() {
             </Link>
             <nav className="hidden items-center gap-6 md:flex">
               <Link
-                href="/shop"
-                className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
-              >
-                {t.nav.shop}
-              </Link>
-              <Link
                 href="/about"
                 className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
               >
