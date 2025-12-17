@@ -9,14 +9,22 @@ export interface CartItem {
   image: string
   quantity: number
   variantId?: string // Shopify variant ID for checkout
+  selectedOptions?: Array<{ name: string; value: string }>
 }
 
 interface CartContextType {
   cart: CartItem[]
   wishlist: string[] // Changed to string array for product handles
-  addToCart: (product: { id: string; title: string; price: number; image: string; variantId?: string }) => void
-  removeFromCart: (id: string) => void
-  updateQuantity: (id: string, quantity: number) => void
+  addToCart: (product: {
+    id: string
+    title: string
+    price: number
+    image: string
+    variantId?: string
+    selectedOptions?: Array<{ name: string; value: string }>
+  }) => void
+  removeFromCart: (id: string, variantId?: string) => void
+  updateQuantity: (id: string, quantity: number, variantId?: string) => void
   toggleWishlist: (id: string) => void
   isInWishlist: (id: string) => boolean
   clearCart: () => void
@@ -50,11 +58,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("plushimo-wishlist", JSON.stringify(wishlist))
   }, [wishlist])
 
-  const addToCart = (product: { id: string; title: string; price: number; image: string; variantId?: string }) => {
+  const addToCart = (product: {
+    id: string
+    title: string
+    price: number
+    image: string
+    variantId?: string
+    selectedOptions?: Array<{ name: string; value: string }>
+  }) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id)
+      // Use both product ID and variant ID to identify unique items
+      const existing = prev.find((item) => item.id === product.id && item.variantId === product.variantId)
+
       if (existing) {
-        return prev.map((item) => (item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item))
+        return prev.map((item) =>
+          item.id === product.id && item.variantId === product.variantId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        )
       }
       return [...prev, { ...product, quantity: 1 }]
     })
@@ -63,16 +84,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     window.dispatchEvent(new CustomEvent("confetti", { detail: { target: document.activeElement } }))
   }
 
-  const removeFromCart = (id: string) => {
-    setCart((prev) => prev.filter((item) => item.id !== id))
+  const removeFromCart = (id: string, variantId?: string) => {
+    setCart((prev) => prev.filter((item) => !(item.id === id && item.variantId === variantId)))
   }
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = (id: string, quantity: number, variantId?: string) => {
     if (quantity <= 0) {
-      removeFromCart(id)
+      removeFromCart(id, variantId)
       return
     }
-    setCart((prev) => prev.map((item) => (item.id === id ? { ...item, quantity } : item)))
+    setCart((prev) =>
+      prev.map((item) => (item.id === id && item.variantId === variantId ? { ...item, quantity } : item)),
+    )
   }
 
   const toggleWishlist = (id: string) => {
