@@ -8,6 +8,13 @@ import { useLanguage } from "@/lib/language-context"
 export function Hero() {
   const { t } = useLanguage()
 
+  const scrollToProducts = () => {
+    const productsSection = document.getElementById("products")
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary to-accent/20 py-20 lg:py-32">
       <div className="absolute inset-0 pointer-events-none opacity-10">
@@ -27,7 +34,11 @@ export function Hero() {
               {t.hero.description}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center lg:justify-start animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-              <Button size="lg" className="gap-2 text-base transition-all hover:gap-3 hover:scale-105 group">
+              <Button
+                size="lg"
+                className="gap-2 text-base transition-all hover:gap-3 hover:scale-105 group"
+                onClick={scrollToProducts}
+              >
                 {t.hero.shopButton} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
