@@ -47,7 +47,7 @@ export default function AboutPage() {
                 About Plushimo
               </h1>
               <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-                We believe that everyone deserves a cuddly companion to brighten their days. Since 2026, Plushimo has
+                We believe that everyone deserves a cuddly companion to brighten their days. Since 2025, Plushimo has
                 been bringing smiles to homes around the world with our carefully curated collection of adorable,
                 high-quality plushies.
               </p>
