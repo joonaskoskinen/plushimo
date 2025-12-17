@@ -68,7 +68,9 @@ export default async function Home() {
           </div>
         )}
 
-        <ProductGrid products={products} />
+        <div id="products">
+          <ProductGrid products={products} />
+        </div>
         <CustomerReviews />
         <Features />
       </main>
