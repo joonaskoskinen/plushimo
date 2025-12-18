@@ -62,35 +62,42 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm animate-in fade-in" onClick={onClose} />
+      <div
+        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm animate-in fade-in touch-none"
+        onClick={onClose}
+      />
 
       {/* Modal */}
-      <div className="fixed left-1/2 top-1/2 z-50 w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
-        <div className="relative mx-4 rounded-2xl bg-background shadow-2xl border">
+      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-4 sm:p-6">
+        <div className="relative w-full max-w-4xl rounded-2xl bg-background shadow-2xl border my-auto max-h-[calc(100vh-2rem)] sm:max-h-[90vh] overflow-y-auto animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-4 top-4 z-10 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background"
+            className="absolute right-2 top-2 sm:right-4 sm:top-4 z-10 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background sticky"
             onClick={onClose}
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
 
-          <div className="grid gap-6 p-6 md:grid-cols-2 md:p-8">
+          <div className="grid gap-4 p-4 sm:gap-6 sm:p-6 md:grid-cols-2 md:p-8 md:gap-8">
             {/* Image Section */}
-            <div className="relative aspect-square overflow-hidden rounded-xl bg-secondary">
-              <Image src={imageUrl || "/placeholder.svg"} alt={productName} fill className="object-cover" />
+            <div className="relative w-full">
+              <div className="aspect-square overflow-hidden rounded-xl bg-secondary">
+                <Image src={imageUrl || "/placeholder.svg"} alt={productName} fill className="object-cover" />
+              </div>
             </div>
 
             {/* Details Section */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3 sm:gap-4">
               <div>
-                <h2 className="text-3xl font-bold text-balance mb-2">{productName}</h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-balance mb-2">{productName}</h2>
               </div>
 
-              <p className="text-4xl font-bold text-primary">{price.toFixed(2)} €</p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">{price.toFixed(2)} €</p>
 
-              <p className="text-muted-foreground text-pretty">{product.description}</p>
+              <p className="text-sm sm:text-base text-muted-foreground text-pretty line-clamp-4 sm:line-clamp-none">
+                {product.description}
+              </p>
 
               {/* Variant Selector */}
               <VariantSelector
@@ -99,28 +106,36 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
                 onVariantChange={setSelectedVariant}
               />
 
-              <div className="mt-auto space-y-3">
-                <Button size="lg" className="w-full gap-2" onClick={handleAddToCart}>
-                  <ShoppingCart className="h-5 w-5" />
+              <div className="mt-auto space-y-2 sm:space-y-3">
+                <Button size="lg" className="w-full gap-2 text-sm sm:text-base h-11 sm:h-12" onClick={handleAddToCart}>
+                  <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
                   {t.products.addToCart}
                 </Button>
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-col sm:flex-row">
                   <Button
                     variant="outline"
                     size="lg"
-                    className="flex-1 gap-2 bg-transparent"
+                    className="flex-1 gap-2 bg-transparent text-sm sm:text-base h-11 sm:h-12"
                     onClick={handleToggleWishlist}
                   >
-                    <Heart className={`h-5 w-5 ${isLiked ? "fill-primary text-primary" : ""}`} />
-                    {isLiked ? t.wishlist.removeFromWishlist : t.wishlist.addToWishlist}
+                    <Heart className={`h-4 w-4 sm:h-5 sm:w-5 ${isLiked ? "fill-primary text-primary" : ""}`} />
+                    <span className="hidden sm:inline">
+                      {isLiked ? t.wishlist.removeFromWishlist : t.wishlist.addToWishlist}
+                    </span>
+                    <span className="sm:hidden">{isLiked ? "Poista" : "Lisää"}</span>
                   </Button>
-                  <Button variant="outline" size="lg" asChild>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    asChild
+                    className="flex-1 text-sm sm:text-base h-11 sm:h-12 bg-transparent"
+                  >
                     <Link href={`/product/${product.handle}`}>{t.productDetail.viewFull}</Link>
                   </Button>
                 </div>
 
-                <p className="text-xs text-muted-foreground text-center">{t.productDetail.freeShipping}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground text-center">{t.productDetail.freeShipping}</p>
               </div>
             </div>
           </div>
