@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button"
 import { X, ShoppingCart, Heart } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/toast"
@@ -112,28 +111,18 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
                   {t.products.addToCart}
                 </Button>
 
-                <div className="flex gap-2 flex-col sm:flex-row">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="flex-1 gap-2 bg-transparent text-sm sm:text-base h-11 sm:h-12"
-                    onClick={handleToggleWishlist}
-                  >
-                    <Heart className={`h-4 w-4 sm:h-5 sm:w-5 ${isLiked ? "fill-primary text-primary" : ""}`} />
-                    <span className="hidden sm:inline">
-                      {isLiked ? t.wishlist.removeFromWishlist : t.wishlist.addToWishlist}
-                    </span>
-                    <span className="sm:hidden">{isLiked ? "Poista" : "Lisää"}</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    asChild
-                    className="flex-1 text-sm sm:text-base h-11 sm:h-12 bg-transparent"
-                  >
-                    <Link href={`/product/${product.handle}`}>{t.productDetail.viewFull}</Link>
-                  </Button>
-                </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full gap-2 bg-transparent text-sm sm:text-base h-11 sm:h-12"
+                  onClick={handleToggleWishlist}
+                >
+                  <Heart className={`h-4 w-4 sm:h-5 sm:w-5 ${isLiked ? "fill-primary text-primary" : ""}`} />
+                  <span className="hidden sm:inline">
+                    {isLiked ? t.wishlist.removeFromWishlist : t.wishlist.addToWishlist}
+                  </span>
+                  <span className="sm:hidden">{isLiked ? "Poista" : "Lisää"}</span>
+                </Button>
 
                 <p className="text-xs sm:text-sm text-muted-foreground text-center">{t.productDetail.freeShipping}</p>
               </div>
