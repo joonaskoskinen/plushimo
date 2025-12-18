@@ -76,18 +76,16 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
 
           <div
             className={`absolute inset-0 bg-background/90 backdrop-blur-sm transition-transform duration-300 flex items-center justify-center gap-2 ${
-              isMobile ? "translate-y-0" : "translate-y-full group-hover:translate-y-0"
+              isMobile ? "hidden" : "translate-y-full group-hover:translate-y-0"
             }`}
           >
             <Button size="sm" className="gap-2" onClick={() => onQuickView?.(product)}>
               <Eye className="h-4 w-4" />
-              <span className="hidden sm:inline">{t.products.quickView}</span>
-              <span className="sm:hidden">View</span>
+              {t.products.quickView}
             </Button>
             <Button size="sm" variant="secondary" className="gap-2" onClick={handleAddToCart}>
               <ShoppingCart className="h-4 w-4" />
-              <span className="hidden sm:inline">{t.products.addToCart}</span>
-              <span className="sm:hidden">Add</span>
+              {t.products.addToCart}
             </Button>
           </div>
 
@@ -114,6 +112,19 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
             <span className="text-xl font-bold text-primary">{price.toFixed(2)} €</span>
           </div>
         </div>
+
+        {isMobile && (
+          <div className="flex gap-2 px-4 pb-4">
+            <Button size="sm" className="flex-1 gap-2" onClick={() => onQuickView?.(product)}>
+              <Eye className="h-4 w-4" />
+              {t.products.quickView}
+            </Button>
+            <Button size="sm" variant="secondary" className="flex-1 gap-2" onClick={handleAddToCart}>
+              <ShoppingCart className="h-4 w-4" />
+              {t.products.addToCart}
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   )
