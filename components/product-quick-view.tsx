@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { X, ShoppingCart, Heart } from "lucide-react"
+import { X, ShoppingCart, Heart, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { useCart } from "@/lib/cart-context"
@@ -22,11 +22,14 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
   const isLiked = isInWishlist(product.handle)
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(product.variants[0] || null)
 
+  const allImages = product.images.edges.map((edge) => edge.node)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const currentImage = allImages[currentImageIndex] || { url: "/placeholder.svg", altText: product.title }
+
   const productName = product.title
   const price = selectedVariant
     ? Number.parseFloat(selectedVariant.price.amount)
     : Number.parseFloat(product.priceRange.minVariantPrice.amount)
-  const imageUrl = product.images.edges[0]?.node.url || "/placeholder.svg"
 
   const handleAddToCart = () => {
     const variantId = selectedVariant?.id
@@ -45,7 +48,7 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
       id: product.handle,
       title: product.title,
       price: price,
-      image: imageUrl,
+      image: currentImage.url,
       variantId: variantId,
     })
     showToast(t.cart.addedToCart, "success")
@@ -56,6 +59,14 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
     if (!isLiked) {
       showToast(t.wishlist.added, "wishlist")
     }
+  }
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % allImages.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)
   }
 
   return (
@@ -79,11 +90,68 @@ export function ProductQuickView({ product, onClose }: ProductQuickViewProps) {
           </Button>
 
           <div className="grid gap-4 p-4 sm:gap-6 sm:p-6 md:grid-cols-2 md:p-8 md:gap-8">
-            {/* Image Section */}
-            <div className="relative w-full">
-              <div className="aspect-square overflow-hidden rounded-xl bg-secondary">
-                <Image src={imageUrl || "/placeholder.svg"} alt={productName} fill className="object-cover" />
+            <div className="relative w-full space-y-3">
+              <div className="relative aspect-square overflow-hidden rounded-xl bg-secondary group">
+                <Image
+                  src={currentImage.url || "/placeholder.svg"}
+                  alt={currentImage.altText || productName}
+                  fill
+                  className="object-cover"
+                />
+
+                {/* Navigation arrows - only show if multiple images */}
+                {allImages.length > 1 && (
+                  <>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={prevImage}
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={nextImage}
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </>
+                )}
+
+                {/* Image counter */}
+                {allImages.length > 1 && (
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
+                    {currentImageIndex + 1} / {allImages.length}
+                  </div>
+                )}
               </div>
+
+              {/* Thumbnail gallery */}
+              {allImages.length > 1 && (
+                <div className="flex gap-2 overflow-x-auto pb-2">
+                  {allImages.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                        index === currentImageIndex
+                          ? "border-primary ring-2 ring-primary/20"
+                          : "border-transparent hover:border-muted-foreground/50"
+                      }`}
+                    >
+                      <Image
+                        src={image.url || "/placeholder.svg"}
+                        alt={image.altText || `${productName} kuva ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Details Section */}
