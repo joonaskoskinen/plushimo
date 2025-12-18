@@ -9,6 +9,7 @@ import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/toast"
 import { use3DTilt } from "@/hooks/use-3d-tilt"
 import { useState } from "react"
+import { useIsMobile } from "@/hooks/use-mobile"
 import type { ShopifyProduct } from "@/lib/shopify/types"
 
 interface ProductCardProps {
@@ -23,6 +24,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
   const isLiked = isInWishlist(product.handle)
   const { ref, style } = use3DTilt()
   const [isHovered, setIsHovered] = useState(false)
+  const isMobile = useIsMobile()
 
   const productName = product.title
   const categoryName = product.productType || "Plushies"
@@ -72,14 +74,20 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
             className={`object-cover transition-all duration-700 ${isHovered ? "scale-125" : "scale-100"}`}
           />
 
-          <div className="absolute inset-0 bg-background/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2">
+          <div
+            className={`absolute inset-0 bg-background/90 backdrop-blur-sm transition-transform duration-300 flex items-center justify-center gap-2 ${
+              isMobile ? "translate-y-0" : "translate-y-full group-hover:translate-y-0"
+            }`}
+          >
             <Button size="sm" className="gap-2" onClick={() => onQuickView?.(product)}>
               <Eye className="h-4 w-4" />
-              {t.products.quickView}
+              <span className="hidden sm:inline">{t.products.quickView}</span>
+              <span className="sm:hidden">View</span>
             </Button>
             <Button size="sm" variant="secondary" className="gap-2" onClick={handleAddToCart}>
               <ShoppingCart className="h-4 w-4" />
-              {t.products.addToCart}
+              <span className="hidden sm:inline">{t.products.addToCart}</span>
+              <span className="sm:hidden">Add</span>
             </Button>
           </div>
 
