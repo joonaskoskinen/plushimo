@@ -278,6 +278,21 @@
     }
   }
 
+  /* Added smooth floating animation for hero plushie */
+  @keyframes float-plushie {
+    0%,
+    100% {
+      transform: translateY(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.05);
+    }
+  }
+
+  .animate-float-plushie {
+    animation: float-plushie 3s ease-in-out infinite;
+  }
+
   .animate-float {
     animation: float linear infinite;
   }
