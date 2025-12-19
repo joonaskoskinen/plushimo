@@ -130,7 +130,7 @@ function Loader() {
   )
 }
 
-export function Hero3DPlushie() {
+export default function Hero3DPlushie() {
   return (
     <div className="w-full h-full">
       <Suspense fallback={<Loader />}>
