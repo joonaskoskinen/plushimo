@@ -27,7 +27,7 @@ async function shopifyFetch<T>({
         query,
         variables,
       }),
-      cache: "no-store", // Ensure fresh data for cart operations
+      next: { revalidate: 3600 }, // Revalidate every hour
     })
 
     if (!response.ok) {
@@ -587,6 +587,10 @@ export async function removeCartLines(cartId: string, lineIds: string[]): Promis
                     price {
                       amount
                       currencyCode
+                    }
+                    selectedOptions {
+                      name
+                      value
                     }
                     product {
                       title
