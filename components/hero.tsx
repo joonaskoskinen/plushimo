@@ -4,7 +4,19 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { useEffect, useState } from "react"
-import { Hero3DPlushie } from "@/components/hero-3d-plushie"
+import dynamic from "next/dynamic"
+
+const Hero3DPlushie = dynamic(
+  () => import("@/components/hero-3d-plushie").then((mod) => ({ default: mod.Hero3DPlushie })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-pulse text-primary text-xl font-medium">Loading 3D...</div>
+      </div>
+    ),
+  },
+)
 
 export function Hero() {
   const { t } = useLanguage()
