@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
-import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { useEffect, useState } from "react"
+import { Hero3DPlushie } from "@/components/hero-3d-plushie"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -24,7 +24,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-secondary to-accent/20 py-20 lg:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-pink-50 via-rose-50 to-amber-50 dark:from-background dark:via-secondary dark:to-accent/20 py-20 lg:py-32">
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="absolute top-10 left-10 text-9xl" style={{ transform: `translateY(${scrollY * 0.2}px)` }}>
           🧸
@@ -61,16 +61,7 @@ export function Hero() {
           </div>
           <div className="relative aspect-square lg:aspect-auto lg:h-[500px] animate-in fade-in zoom-in-95 duration-1000 delay-300">
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="animate-bounce-gentle">
-                <Image
-                  src="/images/kawaii-boba-tea-plushie.jpg"
-                  alt={t.hero.imageAlt}
-                  width={500}
-                  height={500}
-                  className="object-contain drop-shadow-2xl"
-                  priority
-                />
-              </div>
+              <Hero3DPlushie />
             </div>
           </div>
         </div>
