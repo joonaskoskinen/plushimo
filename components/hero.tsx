@@ -4,16 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { useEffect, useState } from "react"
-import dynamic from "next/dynamic"
-
-const Hero3DPlushie = dynamic(() => import("@/components/hero-3d-plushie"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center h-full">
-      <div className="animate-pulse text-primary text-xl font-medium">Loading 3D...</div>
-    </div>
-  ),
-})
+import Image from "next/image"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -70,11 +61,48 @@ export function Hero() {
           </div>
           <div className="relative aspect-square lg:aspect-auto lg:h-[500px] animate-in fade-in zoom-in-95 duration-1000 delay-300">
             <div className="absolute inset-0 flex items-center justify-center">
-              <Hero3DPlushie />
+              <div className="relative w-full max-w-md animate-float-plushie">
+                <Image
+                  src="/images/image.png"
+                  alt="Kawaii Boba Tea Plushie"
+                  width={600}
+                  height={600}
+                  className="object-contain drop-shadow-2xl w-full h-auto"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) scale(1);
+          }
+          50% {
+            transform: translateY(-20px) scale(1.02);
+          }
+        }
+        
+        @keyframes float-plushie {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        :global(.animate-float) {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        :global(.animate-float-plushie) {
+          animation: float-plushie 2s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   )
 }
