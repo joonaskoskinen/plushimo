@@ -19,13 +19,8 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">{t.footer.shop.title}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/shop" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link href="/#products" className="text-muted-foreground hover:text-foreground transition-colors">
                   {t.footer.shop.all}
-                </Link>
-              </li>
-              <li>
-                <Link href="/bestsellers" className="text-muted-foreground hover:text-foreground transition-colors">
-                  {t.footer.shop.bestsellers}
                 </Link>
               </li>
             </ul>
