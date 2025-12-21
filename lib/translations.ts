@@ -108,10 +108,10 @@ export const translations = {
         "Super cute and very cozy. Slightly bigger than I expected, which was actually a nice surprise. Took a little while to arrive, but overall I’m really happy with the purchase.",
     },
     trust: {
-      secure: "Secure Payment",
-      freeShipping: "Free Shipping €50+",
-      payment: "Safe Checkout",
-      quality: "Premium Quality",
+      secure: "Hand-Picked With Care",
+      freeShipping: "Loved by Our Customers",
+      payment: "Safe & Secure Checkout",
+      quality: "Quality You Can Feel",
     },
   },
 }
