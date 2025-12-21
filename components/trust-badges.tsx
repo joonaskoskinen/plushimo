@@ -1,16 +1,16 @@
 "use client"
 
-import { Shield, Truck, CreditCard, Award } from "lucide-react"
+import { HandHeart, Heart, CreditCard, Sparkles } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
 export function TrustBadges() {
   const { t } = useLanguage()
 
   const badges = [
-    { icon: Shield, label: t.trust.secure },
-    { icon: Truck, label: t.trust.freeShipping },
+    { icon: HandHeart, label: t.trust.secure },
+    { icon: Heart, label: t.trust.freeShipping },
     { icon: CreditCard, label: t.trust.payment },
-    { icon: Award, label: t.trust.quality },
+    { icon: Sparkles, label: t.trust.quality },
   ]
 
   return (
