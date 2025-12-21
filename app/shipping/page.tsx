@@ -25,9 +25,9 @@ export default function ShippingPage() {
           <div className="border-l-4 border-primary pl-4">
             <h3 className="font-semibold mb-2">Standard Shipping</h3>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Europe: 10-20 business days</li>
-              <li>North America: 15-25 business days</li>
-              <li>Rest of World: 15-30 business days</li>
+              <li>Europe: 7-28 business days</li>
+              <li>North America: 7-28 business days</li>
+              <li>Rest of World: 7-28 business days</li>
             </ul>
           </div>
         </div>
