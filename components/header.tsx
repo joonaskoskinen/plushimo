@@ -42,6 +42,18 @@ export function Header() {
               >
                 {t.nav.about}
               </Link>
+              <Link
+                href="/shipping"
+                className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+              >
+                {t.nav.shipping}
+              </Link>
+              <Link
+                href="/returns"
+                className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+              >
+                {t.nav.returns}
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-2">
