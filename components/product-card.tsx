@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Heart, ShoppingCart, Eye } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/components/toast"
@@ -66,48 +67,54 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardContent className="p-0">
-        <div className="relative aspect-square overflow-hidden bg-secondary">
-          <Image
-            src={imageUrl || "/placeholder.svg"}
-            alt={productName}
-            fill
-            className={`object-cover transition-all duration-700 ${isHovered ? "scale-125" : "scale-100"}`}
-          />
-
-          <div
-            className={`absolute inset-0 bg-background/90 backdrop-blur-sm transition-transform duration-300 flex items-center justify-center gap-2 ${
-              isMobile ? "hidden" : "translate-y-full group-hover:translate-y-0"
-            }`}
-          >
-            <Button size="sm" className="gap-2" onClick={() => onQuickView?.(product)}>
-              <Eye className="h-4 w-4" />
-              {t.products.quickView}
-            </Button>
-            <Button size="sm" variant="secondary" className="gap-2" onClick={handleAddToCart}>
-              <ShoppingCart className="h-4 w-4" />
-              {t.products.addToCart}
-            </Button>
-          </div>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-2 top-2 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
-            onClick={handleToggleWishlist}
-          >
-            <Heart
-              className={`h-4 w-4 transition-all duration-300 ${
-                isLiked ? "fill-primary text-primary scale-110" : "text-foreground"
-              }`}
+        <Link href={`/product/${product.handle}`} className="block">
+          <div className="relative aspect-square overflow-hidden bg-secondary">
+            <Image
+              src={imageUrl || "/placeholder.svg"}
+              alt={productName}
+              fill
+              className={`object-cover transition-all duration-700 ${isHovered ? "scale-125" : "scale-100"}`}
             />
-            <span className="sr-only">{t.header.favorites}</span>
-          </Button>
-          <div className="absolute left-2 top-2 rounded-full bg-accent/90 px-3 py-1 text-xs font-semibold text-accent-foreground">
-            {categoryName}
+
+            <div
+              className={`absolute inset-0 bg-background/90 backdrop-blur-sm transition-transform duration-300 flex items-center justify-center gap-2 ${
+                isMobile ? "hidden" : "translate-y-full group-hover:translate-y-0"
+              }`}
+            >
+              <Button size="sm" className="gap-2" onClick={() => onQuickView?.(product)}>
+                <Eye className="h-4 w-4" />
+                {t.products.quickView}
+              </Button>
+              <Button size="sm" variant="secondary" className="gap-2" onClick={handleAddToCart}>
+                <ShoppingCart className="h-4 w-4" />
+                {t.products.addToCart}
+              </Button>
+            </div>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-2 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
+              onClick={handleToggleWishlist}
+            >
+              <Heart
+                className={`h-4 w-4 transition-all duration-300 ${
+                  isLiked ? "fill-primary text-primary scale-110" : "text-foreground"
+                }`}
+              />
+              <span className="sr-only">{t.header.favorites}</span>
+            </Button>
+            <div className="absolute left-2 top-2 rounded-full bg-accent/90 px-3 py-1 text-xs font-semibold text-accent-foreground">
+              {categoryName}
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="p-4">
-          <h3 className="mb-2 text-lg font-semibold text-balance">{productName}</h3>
+          <Link href={`/product/${product.handle}`}>
+            <h3 className="mb-2 text-lg font-semibold text-balance hover:text-primary transition-colors">
+              {productName}
+            </h3>
+          </Link>
           <div className="flex items-center justify-between">
             <span className="text-xl font-bold text-primary">{price.toFixed(2)} €</span>
           </div>
