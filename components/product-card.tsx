@@ -109,7 +109,7 @@ export function ProductCard({ product, onQuickView }: ProductCardProps) {
         <div className="p-4">
           <h3 className="mb-2 text-lg font-semibold text-balance">{productName}</h3>
           <div className="flex items-center justify-between">
-            <span className="text-xl font-bold text-primary">{price.toFixed(2)} â‚¬</span>
+            <span className="text-xl font-bold text-primary">{price.toFixed(2)} €</span>
           </div>
         </div>
 
