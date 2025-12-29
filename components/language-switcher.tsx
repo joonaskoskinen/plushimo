@@ -12,9 +12,10 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <Button variant="ghost" size="icon" onClick={toggleLanguage} title="Change language">
+    <Button variant="ghost" size="icon" onClick={toggleLanguage} title="Change language" className="relative">
       <Languages className="h-5 w-5" />
-      <span className="sr-only ml-1 text-xs font-medium">{language.toUpperCase()}</span>
+      <span className="absolute -bottom-0.5 text-[10px] font-bold uppercase">{language}</span>
+      <span className="sr-only">Change language</span>
     </Button>
   )
 }
