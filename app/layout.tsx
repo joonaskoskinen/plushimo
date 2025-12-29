@@ -17,10 +17,26 @@ export const metadata: Metadata = {
   },
   description:
     "Adorable and high-quality plushies for every home. Creating happiness and joy one hug at a time. Free shipping on orders over €50.",
-  keywords: ["plushies", "stuffed animals", "cute plushies", "gift ideas", "soft toys", "teddy bears"],
+  keywords: [
+    "plushies",
+    "stuffed animals",
+    "cute plushies",
+    "gift ideas",
+    "soft toys",
+    "teddy bears",
+    "kawaii plushies",
+    "premium plushies",
+  ],
   authors: [{ name: "Plushimo" }],
   creator: "Plushimo",
   publisher: "Plushimo",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/",
+      "fi-FI": "/",
+    },
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -29,6 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    alternateLocale: "fi_FI",
     url: "/",
     siteName: "Plushimo",
     title: "Plushimo - Adorable Premium Plushies",
@@ -47,6 +64,7 @@ export const metadata: Metadata = {
     title: "Plushimo - Adorable Premium Plushies",
     description: "Adorable and high-quality plushies for every home.",
     images: ["/plushimo-logo.png"],
+    creator: "@plushimo",
   },
   robots: {
     index: true,
@@ -59,6 +77,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  category: "E-commerce",
+  classification: "Toys & Games",
   generator: "v0.app",
   icons: {
     icon: [
