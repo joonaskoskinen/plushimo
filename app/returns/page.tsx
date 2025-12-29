@@ -2,44 +2,46 @@
 
 import { useLanguage } from "@/lib/language-context"
 
-export default function ShippingPage() {
+export default function ReturnsPage() {
   const { t } = useLanguage()
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-3xl">
-      <h1 className="text-4xl font-bold mb-8">{t.shippingPage.title}</h1>
+      <h1 className="text-4xl font-bold mb-8">{t.returnsPage.title}</h1>
 
       <div className="prose prose-gray max-w-none">
-        <p className="text-lg mb-6">{t.shippingPage.intro}</p>
+        <p className="text-lg mb-6">{t.returnsPage.intro}</p>
 
-        <div className="bg-primary/10 p-6 rounded-lg mb-8">
-          <p className="text-lg font-semibold text-center">{t.shippingPage.freeShippingBanner}</p>
+        <h2 className="text-2xl font-semibold mb-4">{t.returnsPage.policy.title}</h2>
+        <p className="mb-6">{t.returnsPage.policy.description}</p>
+        <ul className="list-disc pl-6 mb-6 space-y-2">
+          {t.returnsPage.policy.conditions.map((condition, index) => (
+            <li key={index}>{condition}</li>
+          ))}
+        </ul>
+
+        <h2 className="text-2xl font-semibold mb-4">{t.returnsPage.howTo.title}</h2>
+        <ol className="list-decimal pl-6 mb-6 space-y-3">
+          {t.returnsPage.howTo.steps.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ol>
+
+        <div className="bg-amber-50 dark:bg-amber-950/20 p-6 rounded-lg mb-6">
+          <p className="font-semibold mb-2">{t.returnsPage.important.title}</p>
+          <p>{t.returnsPage.important.message}</p>
         </div>
 
-        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.processing.title}</h2>
-        <p className="mb-6">{t.shippingPage.processing.description}</p>
+        <h2 className="text-2xl font-semibold mb-4">{t.returnsPage.damaged.title}</h2>
+        <p className="mb-6">{t.returnsPage.damaged.description}</p>
 
-        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.methods.title}</h2>
-        <div className="space-y-4 mb-6">
-          <div className="border-l-4 border-primary pl-4">
-            <h3 className="font-semibold mb-2">{t.shippingPage.methods.standard.title}</h3>
-            <ul className="list-disc pl-6 space-y-2">
-              {t.shippingPage.methods.standard.times.map((time, index) => (
-                <li key={index}>{time}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <h2 className="text-2xl font-semibold mb-4">{t.returnsPage.exchanges.title}</h2>
+        <p className="mb-6">{t.returnsPage.exchanges.description}</p>
 
-        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.tracking.title}</h2>
-        <p className="mb-6">{t.shippingPage.tracking.description}</p>
+        <h2 className="text-2xl font-semibold mb-4">{t.returnsPage.refund.title}</h2>
+        <p className="mb-4">{t.returnsPage.refund.description}</p>
 
-        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.customs.title}</h2>
-        <p className="mb-6">{t.shippingPage.customs.description}</p>
-
-        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.issues.title}</h2>
-        <p className="mb-4">{t.shippingPage.issues.description}</p>
-        <p>{t.shippingPage.issues.disclaimer}</p>
+        <p className="text-muted-foreground mt-8">{t.returnsPage.questions}</p>
       </div>
     </div>
   )
