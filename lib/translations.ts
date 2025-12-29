@@ -10,6 +10,7 @@ export const translations = {
       favorites: "Favorites",
       cart: "Shopping Cart",
       menu: "Menu",
+      announcement: "Use code PLUSHIMO10 for 10% off your first order!",
     },
     hero: {
       badge: "",
@@ -542,6 +543,7 @@ export const translations = {
       favorites: "Suosikit",
       cart: "Ostoskori",
       menu: "Valikko",
+      announcement: "Käytä koodia PLUSHIMO10 ja saat 10% alennuksen ensimmäisestä tilauksestasi!",
     },
     hero: {
       badge: "",
