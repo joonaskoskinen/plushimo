@@ -66,30 +66,31 @@ export default function WishlistPage() {
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-2">{t.header.favorites}</h1>
             <p className="text-muted-foreground">
-              {wishlistProducts.length} {wishlistProducts.length === 1 ? "item" : "items"}
+              {wishlistProducts.length}{" "}
+              {wishlistProducts.length === 1 ? t.wishlistPage.itemCount : t.wishlistPage.itemsCount}
             </p>
           </div>
 
           {error && (
             <Alert variant="destructive" className="mb-6">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Tuotteiden lataus epäonnistui</AlertTitle>
+              <AlertTitle>{t.wishlistPage.errorTitle}</AlertTitle>
               <AlertDescription>
-                <p>Shopify-yhteys epäonnistui. Tarkista Storefront API -asetukset.</p>
+                <p>{t.wishlistPage.errorDescription}</p>
                 <p className="text-xs mt-2 opacity-80">{error}</p>
               </AlertDescription>
             </Alert>
           )}
 
           {loading ? (
-            <p className="text-center text-muted-foreground">Loading...</p>
+            <p className="text-center text-muted-foreground">{t.wishlistPage.loading}</p>
           ) : wishlistProducts.length === 0 && !error ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <Heart className="h-24 w-24 text-muted-foreground/50 mb-6" />
-              <h2 className="text-2xl font-semibold mb-3">Your wishlist is empty</h2>
-              <p className="text-muted-foreground mb-6">Save your favorite plushies here for later!</p>
+              <h2 className="text-2xl font-semibold mb-3">{t.wishlistPage.empty.title}</h2>
+              <p className="text-muted-foreground mb-6">{t.wishlistPage.empty.description}</p>
               <Button asChild size="lg">
-                <Link href="/">Browse Collection</Link>
+                <Link href="/">{t.wishlistPage.empty.button}</Link>
               </Button>
             </div>
           ) : (
