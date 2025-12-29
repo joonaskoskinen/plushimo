@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { useCart } from "@/lib/cart-context"
 import Image from "next/image"
+import { LanguageSwitcher } from "./language-switcher"
 
 export function Header() {
   const { t } = useLanguage()
@@ -57,6 +58,7 @@ export function Header() {
             </nav>
           </div>
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <Button variant="ghost" size="icon" className="relative" asChild>
               <Link href="/wishlist">
                 <Heart className="h-5 w-5" />
