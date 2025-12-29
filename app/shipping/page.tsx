@@ -1,61 +1,45 @@
+"use client"
+
+import { useLanguage } from "@/lib/language-context"
+
 export default function ShippingPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-3xl">
-      <h1 className="text-4xl font-bold mb-8">Shipping Information</h1>
+      <h1 className="text-4xl font-bold mb-8">{t.shippingPage.title}</h1>
 
       <div className="prose prose-gray max-w-none">
-        <p className="text-lg mb-6">
-          We want your new plushie friend to arrive safely and quickly! Here's everything you need to know about
-          shipping.
-        </p>
+        <p className="text-lg mb-6">{t.shippingPage.intro}</p>
 
         <div className="bg-primary/10 p-6 rounded-lg mb-8">
-          <p className="text-lg font-semibold text-center">Free Shipping on Orders Over €50</p>
+          <p className="text-lg font-semibold text-center">{t.shippingPage.freeShippingBanner}</p>
         </div>
 
-        <h2 className="text-2xl font-semibold mb-4">Processing Time</h2>
-        <p className="mb-6">
-          Orders are processed within 2-5 business days. During busy seasons (holidays, sales events), processing may
-          take up to 7 business days. You'll receive an email confirmation when your order ships with tracking
-          information.
-        </p>
+        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.processing.title}</h2>
+        <p className="mb-6">{t.shippingPage.processing.description}</p>
 
-        <h2 className="text-2xl font-semibold mb-4">Shipping Methods & Times</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.methods.title}</h2>
         <div className="space-y-4 mb-6">
           <div className="border-l-4 border-primary pl-4">
-            <h3 className="font-semibold mb-2">Standard Shipping</h3>
+            <h3 className="font-semibold mb-2">{t.shippingPage.methods.standard.title}</h3>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Europe: 7-28 business days</li>
-              <li>North America: 7-28 business days</li>
-              <li>Rest of World: 7-28 business days</li>
+              {t.shippingPage.methods.standard.times.map((time, index) => (
+                <li key={index}>{time}</li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <h2 className="text-2xl font-semibold mb-4">Tracking Your Order</h2>
-        <p className="mb-6">
-          Once your order ships, you'll receive a tracking number via email. Please note that tracking information may
-          take 2-3 days to update in the carrier's system.
-        </p>
+        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.tracking.title}</h2>
+        <p className="mb-6">{t.shippingPage.tracking.description}</p>
 
-        <h2 className="text-2xl font-semibold mb-4">Customs & Duties</h2>
-        <p className="mb-6">
-          International orders may be subject to customs fees, import duties, and taxes determined by your country's
-          customs office. These fees are the responsibility of the recipient and are not included in our shipping costs.
-        </p>
+        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.customs.title}</h2>
+        <p className="mb-6">{t.shippingPage.customs.description}</p>
 
-        <h2 className="text-2xl font-semibold mb-4">Shipping Issues</h2>
-        <p className="mb-4">
-          If your order hasn't arrived within the expected timeframe, please contact us at{" "}
-          <a href="mailto:support@plushimo.com" className="text-primary hover:underline">
-            support@plushimo.com
-          </a>{" "}
-          with your order number and we'll investigate.
-        </p>
-        <p>
-          We're not responsible for delays caused by customs, weather, or carrier issues, but we'll always do our best
-          to help resolve any problems.
-        </p>
+        <h2 className="text-2xl font-semibold mb-4">{t.shippingPage.issues.title}</h2>
+        <p className="mb-4">{t.shippingPage.issues.description}</p>
+        <p>{t.shippingPage.issues.disclaimer}</p>
       </div>
     </div>
   )
