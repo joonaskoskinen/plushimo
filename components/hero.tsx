@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { useEffect, useState } from "react"
-import Image from "next/image"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -41,68 +40,24 @@ export function Hero() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-          <div className="flex flex-col gap-6 text-center lg:text-left relative z-10">
-            <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl animate-in fade-in slide-in-from-top-6 duration-700 delay-150">
-              {t.hero.title}
-            </h1>
-            <p className="text-lg text-muted-foreground text-pretty sm:text-xl animate-in fade-in slide-in-from-top-8 duration-700 delay-300">
-              {t.hero.description}
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center lg:justify-start animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-              <Button
-                size="lg"
-                className="gap-2 text-base transition-all hover:gap-3 hover:scale-105 group"
-                onClick={scrollToProducts}
-              >
-                {t.hero.shopButton} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
-          </div>
-          <div className="relative aspect-square lg:aspect-auto lg:h-[500px] animate-in fade-in zoom-in-95 duration-1000 delay-300">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-full max-w-md animate-float-plushie">
-                <Image
-                  src="/images/image.png"
-                  alt="Kawaii Boba Tea Plushie"
-                  width={600}
-                  height={600}
-                  className="object-contain drop-shadow-2xl w-full h-auto"
-                  priority
-                />
-              </div>
-            </div>
+        <div className="flex flex-col gap-6 text-center items-center max-w-3xl mx-auto relative z-10">
+          <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl animate-in fade-in slide-in-from-top-6 duration-700 delay-150">
+            {t.hero.title}
+          </h1>
+          <p className="text-lg text-muted-foreground text-pretty sm:text-xl animate-in fade-in slide-in-from-top-8 duration-700 delay-300">
+            {t.hero.description}
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
+            <Button
+              size="lg"
+              className="gap-2 text-base transition-all hover:gap-3 hover:scale-105 group"
+              onClick={scrollToProducts}
+            >
+              {t.hero.shopButton} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px) scale(1);
-          }
-          50% {
-            transform: translateY(-20px) scale(1.02);
-          }
-        }
-        
-        @keyframes float-plushie {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-
-        :global(.animate-float) {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        :global(.animate-float-plushie) {
-          animation: float-plushie 2s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   )
 }
