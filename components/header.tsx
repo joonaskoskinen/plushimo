@@ -18,7 +18,7 @@ export function Header() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm font-medium flex items-center justify-center gap-2">
             <Tag className="h-4 w-4" />
-            Use code <strong className="font-bold">PLUSHIMO10</strong> for 10% off your first order!
+            {t.header.announcement}
           </p>
         </div>
       </div>
