@@ -1,39 +1,39 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CartSidebar } from "@/components/cart-sidebar"
 import { Ruler, Package, Info } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-
-export const metadata = {
-  title: "Size Guide - Plushimo",
-  description: "Find the perfect size plushie with our comprehensive size guide.",
-}
+import { useLanguage } from "@/lib/language-context"
 
 export default function SizeGuidePage() {
+  const { t } = useLanguage()
+
   const sizes = [
     {
-      name: "Small",
-      size: "15-25 cm",
-      description: "Perfect for desks, shelves, or as a keychain companion",
+      name: t.sizeGuidePage.comparison.sizes.small.name,
+      size: t.sizeGuidePage.comparison.sizes.small.size,
+      description: t.sizeGuidePage.comparison.sizes.small.description,
       image: "/small-plushie-size-comparison.jpg",
     },
     {
-      name: "Medium",
-      size: "25-40 cm",
-      description: "Great for cuddling and ideal for kids and adults alike",
+      name: t.sizeGuidePage.comparison.sizes.medium.name,
+      size: t.sizeGuidePage.comparison.sizes.medium.size,
+      description: t.sizeGuidePage.comparison.sizes.medium.description,
       image: "/medium-plushie-size-comparison.jpg",
     },
     {
-      name: "Large",
-      size: "40-60 cm",
-      description: "Maximum cuddle factor! Perfect for big hugs and comfort",
+      name: t.sizeGuidePage.comparison.sizes.large.name,
+      size: t.sizeGuidePage.comparison.sizes.large.size,
+      description: t.sizeGuidePage.comparison.sizes.large.description,
       image: "/large-plushie-size-comparison.jpg",
     },
     {
-      name: "Extra Large",
-      size: "60+ cm",
-      description: "Statement pieces that become part of your furniture",
+      name: t.sizeGuidePage.comparison.sizes.xlarge.name,
+      size: t.sizeGuidePage.comparison.sizes.xlarge.size,
+      description: t.sizeGuidePage.comparison.sizes.xlarge.description,
       image: "/xlarge-plushie-size-comparison.jpg",
     },
   ]
@@ -41,18 +41,18 @@ export default function SizeGuidePage() {
   const tips = [
     {
       icon: Ruler,
-      title: "Measure Twice",
-      description: "Check product dimensions carefully. All measurements are approximate and may vary slightly.",
+      title: t.sizeGuidePage.tips.measure.title,
+      description: t.sizeGuidePage.tips.measure.description,
     },
     {
       icon: Package,
-      title: "Consider Space",
-      description: "Think about where your plushie will live. Larger plushies need more room to shine!",
+      title: t.sizeGuidePage.tips.space.title,
+      description: t.sizeGuidePage.tips.space.description,
     },
     {
       icon: Info,
-      title: "Age Appropriate",
-      description: "Smaller plushies may contain parts unsuitable for children under 3 years old.",
+      title: t.sizeGuidePage.tips.age.title,
+      description: t.sizeGuidePage.tips.age.description,
     },
   ]
 
@@ -65,11 +65,9 @@ export default function SizeGuidePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
               <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl mb-6">
-                Size Guide
+                {t.sizeGuidePage.title}
               </h1>
-              <p className="text-lg text-muted-foreground text-pretty">
-                Find your perfect plushie size! Use this guide to understand how big each plushie will be in real life.
-              </p>
+              <p className="text-lg text-muted-foreground text-pretty">{t.sizeGuidePage.intro}</p>
             </div>
           </div>
         </section>
@@ -78,10 +76,10 @@ export default function SizeGuidePage() {
         <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl mb-4">Size Comparison</h2>
-              <p className="text-lg text-muted-foreground text-pretty">
-                All sizes are measured from top to bottom when standing
-              </p>
+              <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl mb-4">
+                {t.sizeGuidePage.comparison.title}
+              </h2>
+              <p className="text-lg text-muted-foreground text-pretty">{t.sizeGuidePage.comparison.subtitle}</p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -112,7 +110,9 @@ export default function SizeGuidePage() {
         <section className="bg-secondary py-16 lg:py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-12 text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl mb-4">Helpful Tips</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl mb-4">
+                {t.sizeGuidePage.tips.title}
+              </h2>
             </div>
 
             <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
@@ -134,7 +134,7 @@ export default function SizeGuidePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl">
               <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl mb-8 text-center">
-                Quick Reference
+                {t.sizeGuidePage.reference.title}
               </h2>
               <Card>
                 <CardContent className="p-6">
@@ -142,31 +142,35 @@ export default function SizeGuidePage() {
                     <table className="w-full">
                       <thead>
                         <tr className="border-b">
-                          <th className="pb-3 text-left font-semibold">Size</th>
-                          <th className="pb-3 text-left font-semibold">Height</th>
-                          <th className="pb-3 text-left font-semibold">Best For</th>
+                          <th className="pb-3 text-left font-semibold">{t.sizeGuidePage.reference.headers.size}</th>
+                          <th className="pb-3 text-left font-semibold">{t.sizeGuidePage.reference.headers.height}</th>
+                          <th className="pb-3 text-left font-semibold">{t.sizeGuidePage.reference.headers.bestFor}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y">
                         <tr>
-                          <td className="py-3 font-medium">Small</td>
-                          <td className="py-3 text-muted-foreground">15-25 cm</td>
-                          <td className="py-3 text-muted-foreground">Desk buddies, collecting</td>
+                          <td className="py-3 font-medium">{t.sizeGuidePage.comparison.sizes.small.name}</td>
+                          <td className="py-3 text-muted-foreground">{t.sizeGuidePage.reference.rows.small.height}</td>
+                          <td className="py-3 text-muted-foreground">{t.sizeGuidePage.reference.rows.small.bestFor}</td>
                         </tr>
                         <tr>
-                          <td className="py-3 font-medium">Medium</td>
-                          <td className="py-3 text-muted-foreground">25-40 cm</td>
-                          <td className="py-3 text-muted-foreground">Everyday cuddles, gifts</td>
+                          <td className="py-3 font-medium">{t.sizeGuidePage.comparison.sizes.medium.name}</td>
+                          <td className="py-3 text-muted-foreground">{t.sizeGuidePage.reference.rows.medium.height}</td>
+                          <td className="py-3 text-muted-foreground">
+                            {t.sizeGuidePage.reference.rows.medium.bestFor}
+                          </td>
                         </tr>
                         <tr>
-                          <td className="py-3 font-medium">Large</td>
-                          <td className="py-3 text-muted-foreground">40-60 cm</td>
-                          <td className="py-3 text-muted-foreground">Serious cuddling, comfort</td>
+                          <td className="py-3 font-medium">{t.sizeGuidePage.comparison.sizes.large.name}</td>
+                          <td className="py-3 text-muted-foreground">{t.sizeGuidePage.reference.rows.large.height}</td>
+                          <td className="py-3 text-muted-foreground">{t.sizeGuidePage.reference.rows.large.bestFor}</td>
                         </tr>
                         <tr>
-                          <td className="py-3 font-medium">Extra Large</td>
-                          <td className="py-3 text-muted-foreground">60+ cm</td>
-                          <td className="py-3 text-muted-foreground">Statement pieces, decor</td>
+                          <td className="py-3 font-medium">{t.sizeGuidePage.comparison.sizes.xlarge.name}</td>
+                          <td className="py-3 text-muted-foreground">{t.sizeGuidePage.reference.rows.xlarge.height}</td>
+                          <td className="py-3 text-muted-foreground">
+                            {t.sizeGuidePage.reference.rows.xlarge.bestFor}
+                          </td>
                         </tr>
                       </tbody>
                     </table>
