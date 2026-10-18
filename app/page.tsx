@@ -13,6 +13,7 @@ import { BackToTop } from "@/components/back-to-top"
 import { getProducts } from "@/lib/shopify"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
+import { mockProducts } from "@/lib/shopify/mock-products"
 
 export default async function Home() {
   let products = []
@@ -23,6 +24,7 @@ export default async function Home() {
   } catch (error) {
     console.error("Error fetching products:", error)
     shopifyError = error instanceof Error ? error.message : "Unknown error"
+    products = mockProducts
   }
 
   return (
