@@ -4,6 +4,7 @@ import { CartSidebar } from "@/components/cart-sidebar"
 import ProductPageClient from "./product-page-client"
 import { getProduct } from "@/lib/shopify"
 import type { Metadata } from "next"
+import { getMockProduct } from "@/lib/shopify/mock-products"
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const productId = params.id
@@ -50,7 +51,8 @@ export default async function ProductPage({ params }: { params: { id: string } }
     product = await getProduct(productId)
   } catch (e) {
     console.error("Error fetching product on server:", e)
-    error = e instanceof Error ? e.message : "Failed to load product"
+    product = getMockProduct(productId)
+    error = product ? null : e instanceof Error ? e.message : "Failed to load product"
   }
 
   return (
